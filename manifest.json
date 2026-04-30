@@ -1,0 +1,10 @@
+{
+  "name": "Apalabrados Solver",
+  "short_name": "Apalabrados",
+  "description": "Solver de palabras en español para Apalabrados",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F5F7",
+  "theme_color": "#0071E3",
+  "icons": [{ "src": "icon.png", "sizes": "192x192", "type": "image/png" }]
+}
