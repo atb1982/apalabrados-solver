@@ -158,17 +158,17 @@ button{font-family:inherit;border:none;cursor:pointer;transition:all var(--t);ou
 .btn-primary:active{transform:translateY(0)}
 .btn-primary:disabled{opacity:.6;transform:none;cursor:default}
 .btn-ghost{
-  width:100px;height:50px;border-radius:var(--r-sm);font-size:14px;font-weight:600;
-  background:var(--sf2);color:var(--text2)
+  width:100px;height:50px;border-radius:var(--r-sm);font-size:15px;font-weight:600;
+  background:#FF3B30;color:#fff
 }
-.btn-ghost:hover{background:var(--sf3);color:var(--text)}
+.btn-ghost:hover{background:#E0251A;color:#fff}
 .btn-swap{
-  width:100%;height:44px;margin-top:10px;border-radius:var(--r-sm);
-  font-size:13.5px;font-weight:600;background:#FFD60A;color:#1D1D1F;
+  width:100%;height:50px;margin-top:10px;border-radius:var(--r-sm);
+  font-size:15px;font-weight:600;background:#FFD60A;color:#000000;
   border:none;
   display:flex;align-items:center;justify-content:center;gap:7px
 }
-.btn-swap:hover{background:#F5C800;color:#1D1D1F}
+.btn-swap:hover{background:#F5C800;color:#000000}
 .btn-swap:disabled{opacity:.5;cursor:default}
 
 /* ── RESULTS CARD ── */
@@ -380,24 +380,10 @@ button{font-family:inherit;border:none;cursor:pointer;transition:all var(--t);ou
     <span></span><span></span><span></span>
     <span></span><span></span><span></span>
   </div>
-  <h1>Apalabrados</h1>
-  <p>Solver de palabras en español</p>
+  <h1>Apalabrados Solver</h1>
 </div>
 
 <div class="wrap">
-
-  <!-- DICT LOADER -->
-  <div class="card anim" style="animation-delay:.05s">
-    <div class="dict-row">
-      <div class="dict-icon ok" id="dIcon">✅</div>
-      <div class="dict-meta">
-        <strong id="dTitle">639,292 palabras listas</strong>
-        <small id="dSub">Diccionario incrustado · listo para usar sin conexión</small>
-      </div>
-      <span style="font-size:12px;color:var(--text3)">Listo</span>
-    </div>
-    
-  </div>
 
   <!-- SEARCH -->
   <div class="card anim" style="animation-delay:.1s">
@@ -484,6 +470,10 @@ button{font-family:inherit;border:none;cursor:pointer;transition:all var(--t);ou
   </div>
 
 </div>
+
+<footer style="text-align:center;padding:20px 24px 32px;font-size:11.5px;color:var(--text3);letter-spacing:.02em;">
+  ✅ &nbsp;639,292 palabras · Diccionario incrustado · sin conexión
+</footer>
 
 <script>
 // ── LETTER SCORES ──────────────────────────────────────────────────────────
