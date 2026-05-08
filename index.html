@@ -164,11 +164,11 @@ button{font-family:inherit;border:none;cursor:pointer;transition:all var(--t);ou
 .btn-ghost:hover{background:var(--sf3);color:var(--text)}
 .btn-swap{
   width:100%;height:44px;margin-top:10px;border-radius:var(--r-sm);
-  font-size:13.5px;font-weight:600;background:transparent;color:var(--text2);
-  border:1.5px solid var(--sf3);
+  font-size:13.5px;font-weight:600;background:#FFD60A;color:#1D1D1F;
+  border:none;
   display:flex;align-items:center;justify-content:center;gap:7px
 }
-.btn-swap:hover{background:var(--sf2);color:var(--text)}
+.btn-swap:hover{background:#F5C800;color:#1D1D1F}
 .btn-swap:disabled{opacity:.5;cursor:default}
 
 /* ── RESULTS CARD ── */
@@ -269,6 +269,103 @@ button{font-family:inherit;border:none;cursor:pointer;transition:all var(--t);ou
 .nm-missing b{font-weight:800;color:var(--red);text-transform:uppercase}
 .nm-pts{font-size:11px;font-weight:700;color:#fff;background:var(--text3);border-radius:100px;padding:2px 8px;flex-shrink:0}
 
+
+/* ── WC RESULTS SECTION ── */
+.wc-section {
+  margin-top:20px;
+  background:#FFF8E7;
+  border-radius:var(--r-sm);
+  padding:16px;
+  border:1px solid rgba(255,180,0,0.20);
+}
+.wc-inline {
+  margin-top:4px;margin-bottom:4px;
+  background:#FFF8E7;
+  border-radius:var(--r-sm);
+  padding:14px 16px 16px;
+  border:1px solid rgba(255,180,0,0.20);
+}
+.wc-inline-2 {
+  margin-top:4px;margin-bottom:4px;
+  background:#EBF4FF;
+  border-radius:var(--r-sm);
+  padding:14px 16px 16px;
+  border:1px solid rgba(0,113,227,0.15);
+}
+.wc-section-label {
+  font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.09em;color:var(--text2);margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.wc-divline { flex:1; height:1px; background:rgba(0,0,0,0.12); }
+.wc-toggle {
+  flex-shrink:0;
+  background:none;border:none;cursor:pointer;
+  font-size:16px;color:var(--text3);padding:0;line-height:1;
+  transition:transform var(--t),color var(--t);
+}
+.wc-toggle:hover { color:var(--text2); }
+.wc-inline.collapsed   .len-chips,
+.wc-inline-2.collapsed .len-chips { display:none; }
+.wc-inline.collapsed   .wc-toggle,
+.wc-inline-2.collapsed .wc-toggle { transform:rotate(-90deg); }
+
+/* ── SUBIR BUTTON ── */
+.btn-subir {
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  width:100%;height:44px;margin-top:24px;
+  border-radius:var(--r-sm);
+  font-size:14px;font-weight:600;
+  background:var(--sf2);color:var(--text2);
+  border:1.5px solid var(--sf3);
+  cursor:pointer;transition:all var(--t);
+}
+.btn-subir:hover{background:var(--sf3);color:var(--text);transform:translateY(-1px)}
+
+
+/* ── TILE INPUT FIELDS ── */
+.tile-input-wrapper {
+  position:relative; min-height:50px; cursor:text;
+}
+.tile-display {
+  display:flex; flex-wrap:wrap; align-items:center; gap:4px;
+  min-height:50px; padding:8px 12px;
+  background:var(--sf2);
+  border:1.5px solid transparent;
+  border-radius:var(--r-sm);
+  transition:border-color var(--t),box-shadow var(--t),background var(--t);
+}
+.tile-display.focused {
+  border-color:var(--accent); background:#fff;
+  box-shadow:0 0 0 3px var(--accentL);
+}
+.tile-input-real {
+  position:absolute; inset:0;
+  opacity:0; cursor:text;
+  font-size:16px; /* prevent iOS zoom */
+  width:100%; height:100%;
+}
+.input-ph { color:var(--text3); font-size:14px; font-weight:400; letter-spacing:0; }
+.it {
+  display:flex; align-items:center; justify-content:center;
+  width:28px; height:30px;
+  background:var(--tile-bg);
+  border-radius:3px;
+  border:1px solid rgba(0,0,0,0.08);
+  border-bottom:2.5px solid var(--tile-bdr);
+  font-size:13px; font-weight:800; color:var(--text);
+  text-transform:uppercase;
+  box-shadow:0 1px 2px rgba(0,0,0,0.09);
+}
+.it.it-wc {
+  background:var(--tile-wc-bg);
+  border-bottom-color:var(--tile-wc-bdr);
+  color:var(--tile-wc-txt);
+}
+.it.it-pat {
+  background:var(--sf3); border-bottom-color:var(--text3);
+  color:var(--text2); font-size:15px;
+}
 /* ── ANIMATIONS ── */
 @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
 @keyframes fadeUp  {from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none}}
@@ -306,9 +403,12 @@ button{font-family:inherit;border:none;cursor:pointer;transition:all var(--t);ou
   <div class="card anim" style="animation-delay:.1s">
     <div class="field">
       <label>Letras disponibles</label>
-      <input type="text" id="letters" placeholder="ej. abcdefg"
-             maxlength="20" autocomplete="off" autocorrect="off"
-             autocapitalize="off" spellcheck="false">
+      <div class="tile-input-wrapper">
+        <div class="tile-display" id="lettersDisplay"><span class="input-ph">ej. abcdefg</span></div>
+        <input type="text" id="letters" class="tile-input-real"
+               maxlength="20" autocomplete="off" autocorrect="off"
+               autocapitalize="off" spellcheck="false">
+      </div>
       <span class="hint">Hasta 12 letras · Usa * para comodines</span>
       <!-- Wildcard pin area — shown only when * is present -->
       <div id="wcPins" class="wc-pins hidden">
@@ -318,9 +418,12 @@ button{font-family:inherit;border:none;cursor:pointer;transition:all var(--t);ou
     </div>
     <div class="field">
       <label>Patrón <em>(opcional)</em></label>
-      <input type="text" id="pattern" placeholder="ej. -AS  ·  AS-  ·  AS.AS"
-             autocomplete="off" autocorrect="off"
-             autocapitalize="off" spellcheck="false">
+      <div class="tile-input-wrapper">
+        <div class="tile-display" id="patternDisplay"><span class="input-ph">ej. &nbsp;-AS &nbsp;·&nbsp; AS- &nbsp;·&nbsp; AS.AS</span></div>
+        <input type="text" id="pattern" class="tile-input-real"
+               autocomplete="off" autocorrect="off"
+               autocapitalize="off" spellcheck="false">
+      </div>
       <span class="hint">- cualquier secuencia &nbsp;·&nbsp; . exactamente una letra</span>
     </div>
     <div class="actions">
@@ -345,6 +448,10 @@ button{font-family:inherit;border:none;cursor:pointer;transition:all var(--t);ou
       </div>
     </div>
     <div id="word-list"></div>
+    <div id="wc-section" class="wc-section hidden">
+      <div class="wc-section-label">Con un comodín adicional</div>
+      <div id="wc-word-list"></div>
+    </div>
   </div>
 
   <!-- SWAP SUGGESTION -->
@@ -373,6 +480,7 @@ button{font-family:inherit;border:none;cursor:pointer;transition:all var(--t);ou
     </div>
     <div class="sec-label">Palabras más cercanas</div>
     <div class="near-miss-list" id="nearMissList"></div>
+    <button class="btn-subir" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ &nbsp;Subir al inicio</button>
   </div>
 
 </div>
@@ -32359,15 +32467,58 @@ const DEMO = [
 // ── STATE ──────────────────────────────────────────────────────────────────
 let dict         = DEMO;
 let words        = [];
+let wordsWC      = [];   // words needing exactly 1 extra wildcard
+let wordsWC2     = [];   // words needing exactly 2 extra wildcards
 let sortBy       = 'score';
 let swapAnalysis = null;
 
 // Tile-rendering state — set by solve(), read by wordToTiles()
-let lastRealFreq   = {};  // freq of actual rack tiles
-let lastPinnedFreq = {};  // freq of letters assigned to specific wildcards
-let lastUnpinned   = 0;   // count of wildcards with no letter assigned
+// Base (no extra wildcard)
+let lastRealFreq   = {};
+let lastPinnedFreq = {};
+let lastUnpinned   = 0;
+// +1 wildcard state
+let lastRealFreqWC   = {};
+let lastPinnedFreqWC = {};
+let lastUnpinnedWC   = 1;
+// +2 wildcard state
+let lastRealFreqWC2   = {};
+let lastPinnedFreqWC2 = {};
+let lastUnpinnedWC2   = 2;
 
 // ── DICT LOADER (eliminado — diccionario incrustado) ─────────────────────
+
+
+// ── TILE INPUT DISPLAY ─────────────────────────────────────────────────────
+const LETTERS_PH = '<span class="input-ph">ej. abcdefg</span>';
+const PATTERN_PH = '<span class="input-ph">ej. &nbsp;-AS &nbsp;·&nbsp; AS- &nbsp;·&nbsp; AS.AS</span>';
+
+function renderInputTiles(val, isPattern) {
+  if (!val) return isPattern ? PATTERN_PH : LETTERS_PH;
+  return [...val].map(c => {
+    if (!isPattern && c === '*') return `<span class="it it-wc">✱</span>`;
+    if (isPattern && (c === '-' || c === '.'))
+      return `<span class="it it-pat">${c === '.' ? '·' : '—'}</span>`;
+    return `<span class="it">${c.toUpperCase()}</span>`;
+  }).join('');
+}
+
+function syncTiles(inputId, displayId, isPattern) {
+  const val = document.getElementById(inputId).value;
+  document.getElementById(displayId).innerHTML = renderInputTiles(val, isPattern);
+}
+
+function initTileInput(inputId, displayId, isPattern) {
+  const inp  = document.getElementById(inputId);
+  const disp = document.getElementById(displayId);
+
+  // Click on tile display → focus the hidden real input
+  disp.addEventListener('click', () => inp.focus());
+
+  inp.addEventListener('input', () => syncTiles(inputId, displayId, isPattern));
+  inp.addEventListener('focus', () => disp.classList.add('focused'));
+  inp.addEventListener('blur',  () => disp.classList.remove('focused'));
+}
 
 // ── WILDCARD PINS UI ───────────────────────────────────────────────────────
 function getPinnedLetters() {
@@ -32443,14 +32594,13 @@ function toRegex(p) {
   return new RegExp(rx+'$');
 }
 
-function solve(raw, pat) {
-  const s        = raw.toLowerCase();
-  const wcCount  = (s.match(/\*/g)||[]).length;
+function buildFreqState(raw, extraWC=0) {
+  const s = raw.toLowerCase();
+  const wcCount = (s.match(/\*/g)||[]).length;
   const realLetters = s.replace(/\*/g,'');
-
-  const realFreq   = freq(realLetters);
+  const realFreq = freq(realLetters);
   const pinnedFreq = {};
-  let   unpinned   = 0;
+  let unpinned = extraWC; // start with extra wildcards
 
   const pins = getPinnedLetters();
   for (let i = 0; i < wcCount; i++) {
@@ -32458,26 +32608,30 @@ function solve(raw, pat) {
     if (p && /^[a-záéíóúüñ]$/.test(p)) pinnedFreq[p] = (pinnedFreq[p]||0)+1;
     else unpinned++;
   }
+  return { realFreq, pinnedFreq, unpinned };
+}
 
-  // Store for tile rendering
-  lastRealFreq   = realFreq;
-  lastPinnedFreq = pinnedFreq;
-  lastUnpinned   = unpinned;
+function solve(raw, pat, extraWC=0) {
+  const { realFreq, pinnedFreq, unpinned } = buildFreqState(raw, extraWC);
+
+  if (extraWC === 0) {
+    lastRealFreq = realFreq; lastPinnedFreq = pinnedFreq; lastUnpinned = unpinned;
+  } else if (extraWC === 1) {
+    lastRealFreqWC = realFreq; lastPinnedFreqWC = pinnedFreq; lastUnpinnedWC = unpinned;
+  } else if (extraWC === 2) {
+    lastRealFreqWC2 = realFreq; lastPinnedFreqWC2 = pinnedFreq; lastUnpinnedWC2 = unpinned;
+  }
 
   const rx = toRegex(pat);
   return dict.filter(w => (!rx||rx.test(w)) && canMake(w, realFreq, pinnedFreq, unpinned));
 }
 
 // ── TILE BUILDER ──────────────────────────────────────────────────────────
-// Walks the word left-to-right, consuming from realFreq first (normal tile),
-// then from pinnedFreq (wildcard tile), then using unpinned wildcards (wildcard tile).
-function wordToTiles(word) {
-  const noWC = lastUnpinned===0 && Object.keys(lastPinnedFreq).length===0;
-  if (noWC) {
-    return [...word].map(c=>`<span class="tile">${c.toUpperCase()}</span>`).join('');
-  }
-  const real   = {...lastRealFreq};
-  const pinned = {...lastPinnedFreq};
+function wordToTiles(word, rf, pf, uc) {
+  // rf=realFreq, pf=pinnedFreq, uc=unpinnedCount
+  const noWC = uc===0 && Object.keys(pf).length===0;
+  if (noWC) return [...word].map(c=>`<span class="tile">${c.toUpperCase()}</span>`).join('');
+  const real = {...rf}, pinned = {...pf};
   return [...word].map(c => {
     if (real[c]   > 0) { real[c]--;   return `<span class="tile">${c.toUpperCase()}</span>`; }
     if (pinned[c] > 0) { pinned[c]--; return `<span class="tile wc">${c.toUpperCase()}</span>`; }
@@ -32486,63 +32640,110 @@ function wordToTiles(word) {
 }
 
 // ── RENDER RESULTS ─────────────────────────────────────────────────────────
-function renderWords() {
-  const list = document.getElementById('word-list');
-  document.getElementById('resCount').textContent =
-    `${words.length.toLocaleString()} ${words.length===1?'palabra':'palabras'}`;
+function renderBaseGroup(len, group, mx, gi) {
+  const pl = len===1?'letra':'letras';
+  const entries = group.map((w,i) => {
+    const s=pts(w), r=s/mx;
+    const tier = r>.75?'t4':r>.5?'t3':r>.25?'t2':'';
+    return `<div class="word-entry ${tier}" style="animation-delay:${Math.min((gi*30)+(i*6),320)}ms">
+      <div class="word-tiles">${wordToTiles(w,lastRealFreq,lastPinnedFreq,lastUnpinned)}</div>
+      <span class="wpts">${s}</span>
+    </div>`;
+  }).join('');
+  return `<div class="len-group">
+    <div class="len-header">
+      <span class="len-label">${len} ${pl}</span>
+      <div class="len-line"></div>
+      <span class="len-label">${group.length}</span>
+    </div>
+    <div class="len-chips">${entries}</div>
+  </div>`;
+}
 
-  if (!words.length) {
-    list.innerHTML='<div class="no-words">No se encontraron palabras con estas letras.</div>';
+function renderWCGroup(len, group, mx, variant=1) {
+  const pl = len===1?'letra':'letras';
+  const cls = variant===2 ? 'wc-inline-2' : 'wc-inline';
+  const lbl = variant===2 ? 'Con dos comodines' : 'Con un comodín';
+  const rf  = variant===2 ? lastRealFreqWC2   : lastRealFreqWC;
+  const pf  = variant===2 ? lastPinnedFreqWC2 : lastPinnedFreqWC;
+  const uc  = variant===2 ? lastUnpinnedWC2   : lastUnpinnedWC;
+  const entries = group.map((w,i) => {
+    const s=pts(w), r=s/mx;
+    const tier = r>.75?'t4':r>.5?'t3':r>.25?'t2':'';
+    return `<div class="word-entry ${tier}" style="animation-delay:${Math.min(i*7,240)}ms">
+      <div class="word-tiles">${wordToTiles(w,rf,pf,uc)}</div>
+      <span class="wpts">${s}</span>
+    </div>`;
+  }).join('');
+  return `<div class="${cls}">
+    <div class="wc-section-label">
+      ${lbl} · ${len} ${pl}
+      <span class="wc-divline"></span>
+      <button class="wc-toggle" onclick="this.closest('.wc-inline,.wc-inline-2').classList.toggle('collapsed')" title="Minimizar">▾</button>
+    </div>
+    <div class="len-chips">${entries}</div>
+  </div>`;
+}
+
+function renderWords() {
+  const secSort = (a,b) => sortBy==='alpha' ? a.localeCompare(b,'es') : pts(b)-pts(a);
+
+  // Group base words by length
+  const baseGroups = {};
+  for (const w of words) { const l=w.length; if (!baseGroups[l]) baseGroups[l]=[]; baseGroups[l].push(w); }
+  const baseLengths = Object.keys(baseGroups).map(Number).sort((a,b)=>b-a);
+  baseLengths.forEach(l => baseGroups[l].sort(secSort));
+
+  // WC1: only the single longest-length group
+  const wc1ByLen = {};
+  for (const w of wordsWC) { const l=w.length; if (!wc1ByLen[l]) wc1ByLen[l]=[]; wc1ByLen[l].push(w); }
+  const wc1MaxLen = wordsWC.length ? Math.max(...Object.keys(wc1ByLen).map(Number)) : 0;
+  const topWC1 = wc1MaxLen ? wc1ByLen[wc1MaxLen].sort(secSort) : [];
+
+  // WC2: only the single longest-length group
+  const wc2ByLen = {};
+  for (const w of wordsWC2) { const l=w.length; if (!wc2ByLen[l]) wc2ByLen[l]=[]; wc2ByLen[l].push(w); }
+  const wc2MaxLen = wordsWC2.length ? Math.max(...Object.keys(wc2ByLen).map(Number)) : 0;
+  const topWC2 = wc2MaxLen ? wc2ByLen[wc2MaxLen].sort(secSort) : [];
+
+  const allWords = [...words, ...wordsWC, ...wordsWC2];
+  const mx = allWords.length ? Math.max(...allWords.map(pts)) : 1;
+
+  const total = words.length + wordsWC.length + wordsWC2.length;
+  document.getElementById('resCount').textContent =
+    `${total.toLocaleString()} ${total===1?'palabra':'palabras'}`;
+
+  if (!total) {
+    document.getElementById('word-list').innerHTML =
+      '<div class="no-words">No se encontraron palabras con estas letras.</div>';
+    document.getElementById('wc-section').classList.add('hidden');
     return;
   }
 
-  const secSort = (a,b) =>
-    sortBy==='alpha' ? a.localeCompare(b,'es') : pts(b)-pts(a);
+  // Order: longest base group → WC1 top → WC2 top → remaining base groups
+  let html = '';
 
-  const groups = {};
-  for (const w of words) {
-    const l = w.length; if (!groups[l]) groups[l]=[]; groups[l].push(w);
+  if (baseLengths.length) {
+    // First (longest) base group
+    html += renderBaseGroup(baseLengths[0], baseGroups[baseLengths[0]], mx, 0);
+    // WC1 and WC2 immediately after
+    if (topWC1.length) html += renderWCGroup(wc1MaxLen, topWC1, mx, 1);
+    if (topWC2.length) html += renderWCGroup(wc2MaxLen, topWC2, mx, 2);
+    // Remaining base groups
+    baseLengths.slice(1).forEach((len, gi) => {
+      html += renderBaseGroup(len, baseGroups[len], mx, gi+1);
+    });
+  } else {
+    // No base words — show WC groups at top
+    if (topWC1.length) html += renderWCGroup(wc1MaxLen, topWC1, mx, 1);
+    if (topWC2.length) html += renderWCGroup(wc2MaxLen, topWC2, mx, 2);
   }
-  const lengths = Object.keys(groups).map(Number).sort((a,b)=>b-a);
-  lengths.forEach(l => groups[l].sort(secSort));
 
-  const cap=300; let rendered=0, remaining=0;
-  const mx = Math.max(...words.map(pts));
-
-  const html = lengths.map((len, gi) => {
-    const group = groups[len];
-    if (rendered>=cap) { remaining+=group.length; return ''; }
-    const toShow = group.slice(0, cap-rendered);
-    remaining += group.length - toShow.length;
-    rendered  += toShow.length;
-
-    const entries = toShow.map((w,i) => {
-      const s=pts(w), r=s/mx;
-      const tier = r>.75?'t4':r>.5?'t3':r>.25?'t2':'';
-      const delay = Math.min((gi*30)+(i*6), 320);
-      return `<div class="word-entry ${tier}" style="animation-delay:${delay}ms">
-        <div class="word-tiles">${wordToTiles(w)}</div>
-        <span class="wpts">${s}</span>
-      </div>`;
-    }).join('');
-
-    const pl = len===1?'letra':'letras';
-    return `<div class="len-group">
-      <div class="len-header">
-        <span class="len-label">${len} ${pl}</span>
-        <div class="len-line"></div>
-        <span class="len-label">${group.length}</span>
-      </div>
-      <div class="len-chips">${entries}</div>
-    </div>`;
-  }).join('');
-
-  list.innerHTML = html + (remaining>0
-    ? `<div class="more-msg">… y ${remaining.toLocaleString()} palabras más. Usa un patrón para refinar.</div>`
-    : '');
+  document.getElementById('word-list').innerHTML = html;
+  document.getElementById('wc-section').classList.add('hidden');
 }
 
-// ── SWAP ANALYSIS ──────────────────────────────────────────────────────────
+// ── SWAP ANALYSIS ─
 // Lightweight setup — heavy work happens per slider move in getSwapForN
 function computeSwapAnalysis(lettersRaw) {
   const raw = lettersRaw.toLowerCase().replace(/\*/g,'');
@@ -32687,7 +32888,13 @@ function run() {
   const btn = document.getElementById('solveBtn');
   btn.disabled=true; btn.textContent='Buscando…';
   setTimeout(()=>{
-    words = solve(raw, pat);
+    words        = solve(raw, pat, 0);
+    const allWC1 = solve(raw, pat, 1);
+    const allWC2 = solve(raw, pat, 2);
+    const baseSet = new Set(words);
+    const wc1Set  = new Set(allWC1);
+    wordsWC  = allWC1.filter(w => !baseSet.has(w));
+    wordsWC2 = allWC2.filter(w => !wc1Set.has(w));
     renderWords();
     document.getElementById('resultsCard').classList.remove('hidden');
     btn.disabled=false; btn.textContent='Buscar palabras';
@@ -32730,15 +32937,20 @@ document.getElementById('swapSlider').addEventListener('input', ()=>{
 document.getElementById('clearBtn').addEventListener('click', ()=>{
   document.getElementById('letters').value  = '';
   document.getElementById('pattern').value  = '';
+  syncTiles('letters','lettersDisplay',false);
+  syncTiles('pattern','patternDisplay',true);
   document.getElementById('wcPinsRow').innerHTML = '';
   document.getElementById('wcPins').classList.add('hidden');
   document.getElementById('resultsCard').classList.add('hidden');
   document.getElementById('swapCard').classList.add('hidden');
   document.getElementById('word-list').innerHTML = '';
+  document.getElementById('wc-word-list').innerHTML = '';
+  document.getElementById('wc-section').classList.add('hidden');
+  words=[]; wordsWC=[]; wordsWC2=[];
   document.getElementById('swapSlider').value = 1;
   updateSliderLabel(1);
   document.getElementById('sliderReach').textContent = '';
-  words=[]; swapAnalysis=null;
+  swapAnalysis=null;
   lastRealFreq={}; lastPinnedFreq={}; lastUnpinned=0;
   document.getElementById('letters').focus();
 });
@@ -32747,7 +32959,7 @@ document.querySelectorAll('.tab').forEach(t=>{
   t.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
     t.classList.add('on'); sortBy=t.dataset.s;
-    if (words.length) renderWords();
+    if (words.length || wordsWC.length || wordsWC2.length) renderWords();
   });
 });
 
@@ -32756,6 +32968,9 @@ document.querySelectorAll('.tab').forEach(t=>{
     if (e.key==='Enter') run();
   });
 });
+
+initTileInput('letters', 'lettersDisplay', false);
+initTileInput('pattern', 'patternDisplay', true);
 </script>
 
   <script>
