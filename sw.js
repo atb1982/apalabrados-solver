@@ -1,4 +1,4 @@
-const CACHE = 'apalabrados-v2';
+const CACHE = 'apalabrados-v3';
 const ASSETS = ['/', '/index.html'];
 
 self.addEventListener('install', e => {
